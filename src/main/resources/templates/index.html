@@ -26,11 +26,14 @@
                         <h4 th:text="${tarea.nombre}"></h4>
                         <span class="badge badge-pill badge-danger ml-2" th:text="${tarea.prioridad}"></span>
                     </div>
-                    <div class="card-body" th:text="${tarea.descripcion}">
+                    <div class="card-body" th:text="${tarea.descripcion}"></div>
+                    <div>
+                        <span class="badge badge-pill badge-success ml-2" th:text="${tarea.estado}"></span>
+                    </div>
+                    <div>
                         <p class="mt-4">
                             <mark th:text="${tarea.responsable}"></mark>
                         </p>
-                        <span class="badge badge-pill badge-info ml-2" th:text="${tarea.estado}"></span>
                     </div>
                 </div>
                 <div class="Button" align="center">
