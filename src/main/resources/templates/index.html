@@ -1,10 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Tareas</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-<h1>Lista</h1>
+<nav class="navbar navbar-dark bg-dark">
+    <a href="" class="text-white">
+        Tareas
+        <span class="badge badge-pill badge-light" th:text="${tareas.size()}"></span>
+    </a>
+</nav>
+<div class="container">
+    <h1 th:if="${tareas.isEmpty()}">No hay tareas</h1>
+    <div class="card-header bf-info text-white">
+        <a class="btn btn-success float-left" th:href="@{/crear}">Agregar</a>
+    </div>
+    <div class="row mt-4" th:if="${!tareas.isEmpty()}">
+        <th:block th:each="tarea : ${tareas}">
+            <div class="col-md-4">
+                <div class="card mt-5 text-center mb-2">
+                    <div class="card-header">
+                        <h4 th:text="${tarea.nombre}"></h4>
+                        <span class="badge badge-pill badge-danger ml-2" th:text="${tarea.prioridad}"></span>
+                    </div>
+                    <div class="card-body" th:text="${tarea.descripcion}">
+                        <p class="mt-4">
+                            <mark th:text="${tarea.responsable}"></mark>
+                        </p>
+                        <span class="badge badge-pill badge-info ml-2" th:text="${tarea.estado}"></span>
+                    </div>
+                </div>
+                <div class="Button" align="center">
+                    <a th:href="@{/editar/{id}(id=${tarea.id})}" class="btn btn-info">Editar</a>
+                    <a th:href="@{/eliminar/{id}(id=${tarea.id})}" class="btn btn-danger">Eliminar</a>
+                </div>
+            </div>
+        </th:block>
+    </div>
+</div>
 </body>
 </html>
