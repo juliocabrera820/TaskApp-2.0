@@ -1,7 +1,7 @@
 package com.proyecto.demo.controlador;
 
-import com.proyecto.demo.model.Tarea;
-import com.proyecto.demo.model.TareaService;
+import com.proyecto.demo.model.entity.Tarea;
+import com.proyecto.demo.model.service.TareaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
