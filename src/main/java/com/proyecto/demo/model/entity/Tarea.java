@@ -1,12 +1,14 @@
-package com.proyecto.demo.model;
+package com.proyecto.demo.model.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Tarea {
     @Id
     @Column
