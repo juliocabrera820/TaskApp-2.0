@@ -1,6 +1,6 @@
-package com.proyecto.demo.model;
+package com.proyecto.demo.model.service;
 
-import com.proyecto.demo.model.Tarea;
+import com.proyecto.demo.model.entity.Tarea;
 
 import java.util.List;
 
