@@ -19,7 +19,6 @@ public class Tarea {
     @NotEmpty(message = "Debes ingresar un nombre")
     private String nombre;
     @Column
-    @Size(min = 50,message = "La descripcion debe ser mayor a 50 caracteres")
     @Size(max = 100,message = "La descripcion debe ser menor a 100 caracteres")
     @NotEmpty(message = "Debes ingresar una descripcion")
     private String descripcion;
