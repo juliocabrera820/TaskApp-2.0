@@ -14,6 +14,20 @@
         <span class="badge badge-pill badge-light" th:text="${tareas.size()}"></span>
     </a>
 </nav>
+
+<div class="alert alert-success alert-dismissible" th:if="${guardado!=null}">
+    <label th:text="${guardado}"></label>
+    <button type="button" class="close" data-dismiss="alert"></button>
+</div>
+<div class="alert alert-danger alert-dismissible" th:if="${eliminado!=null}">
+    <label th:text="${eliminado}"></label>
+    <button type="button" class="close" data-dismiss="alert"></button>
+</div>
+<div class="alert alert-info alert-dismissible" th:if="${editado!=null}">
+    <label th:text="${editado}"></label>
+    <button type="button" class="close" data-dismiss="alert"></button>
+</div>
+
 <div class="container">
     <h1 th:if="${tareas.isEmpty()}">No hay tareas</h1>
     <div class="card-header bf-info text-white">
@@ -39,7 +53,7 @@
                 </div>
                 <div class="Button" align="center">
                     <a th:href="@{/editar/{id}(id=${tarea.id})}" class="btn btn-info">Editar</a>
-                    <a th:href="@{/eliminar/{id}(id=${tarea.id})}" class="btn btn-danger">Eliminar</a>
+                    <a th:href="@{/eliminar/{id}(id=${tarea.id})}" class="btn btn-danger" onclick="return confirm('¿Quieres eliminar la tarea?');">Eliminar</a>
                 </div>
             </div>
         </th:block>
