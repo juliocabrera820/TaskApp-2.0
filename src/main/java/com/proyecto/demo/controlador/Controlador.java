@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class Controlador {
@@ -60,17 +61,23 @@ public class Controlador {
 
     @GetMapping("/editar/{id}")
     public String editar(Model model,@PathVariable("id") int id){
-        model.addAttribute("titulo","Editar Tarea");
-        Tarea tarea = tareaService.editar(id);
-        model.addAttribute("tarea",tarea);
-        model.addAttribute("estados",estados);
-        model.addAttribute("prioridades",prioridades);
-        return "formTarea";
+        Optional<Tarea> tareaOp = Optional.ofNullable(tareaService.editar(id));
+        if(tareaOp.isPresent()){
+            model.addAttribute("titulo","Editar Tarea");
+            Tarea tarea = tareaService.editar(id);
+            model.addAttribute("tarea",tarea);
+            model.addAttribute("estados",estados);
+            model.addAttribute("prioridades",prioridades);
+            return "formTarea";
+        }
+        return "redirect:/";
     }
 
     @GetMapping("/eliminar/{id}")
     public String eliminar(@PathVariable("id") int id){
-        tareaService.eliminar(id);
+        Optional<Tarea> tareaOp = Optional.ofNullable(tareaService.editar(id));
+        if (tareaOp.isPresent())
+            tareaService.eliminar(id);
         return "redirect:/";
     }
 }
