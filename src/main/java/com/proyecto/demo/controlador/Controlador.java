@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.Arrays;
@@ -48,7 +49,7 @@ public class Controlador {
     }
 
     @PostMapping("/guardar")
-    public String guardar(@Valid @ModelAttribute Tarea tarea, BindingResult bindingResult,Model model){
+    public String guardar(@Valid @ModelAttribute Tarea tarea, BindingResult bindingResult, Model model,RedirectAttributes attributes){
         if (bindingResult.hasErrors()){
             model.addAttribute("tarea",tarea);
             model.addAttribute("estados",estados);
@@ -56,11 +57,12 @@ public class Controlador {
             return "/formTarea";
         }
         tareaService.agregar(tarea);
+        attributes.addFlashAttribute("guardado","La tarea se guardó");
         return "redirect:/";
     }
 
     @GetMapping("/editar/{id}")
-    public String editar(Model model,@PathVariable("id") int id){
+    public String editar(Model model,@PathVariable("id") int id,RedirectAttributes attributes){
         Optional<Tarea> tareaOp = Optional.ofNullable(tareaService.editar(id));
         if(tareaOp.isPresent()){
             model.addAttribute("titulo","Editar Tarea");
@@ -70,14 +72,19 @@ public class Controlador {
             model.addAttribute("prioridades",prioridades);
             return "formTarea";
         }
+        attributes.addFlashAttribute("editado","Error al editar la tarea");
         return "redirect:/";
     }
 
     @GetMapping("/eliminar/{id}")
-    public String eliminar(@PathVariable("id") int id){
+    public String eliminar(@PathVariable("id") int id,RedirectAttributes attributes){
         Optional<Tarea> tareaOp = Optional.ofNullable(tareaService.editar(id));
-        if (tareaOp.isPresent())
+        if (tareaOp.isPresent()){
             tareaService.eliminar(id);
+            attributes.addFlashAttribute("eliminado","La tarea ha sido eliminada");
+            return "redirect:/";
+        }
+        attributes.addFlashAttribute("eliminado","Error al eliminar la tarea");
         return "redirect:/";
     }
 }
