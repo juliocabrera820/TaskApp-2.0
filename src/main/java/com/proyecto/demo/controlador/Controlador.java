@@ -28,6 +28,8 @@ import java.util.Optional;
 @Controller
 public class Controlador {
 
+    @Autowired
+    private TareaService tareaService;
     private List<String> estados;
     private List<String> prioridades;
 
@@ -39,9 +41,6 @@ public class Controlador {
         estados = Arrays.asList("En espera","En progreso","Terminado");
         prioridades = Arrays.asList("Alta","Media","Baja");
     }
-
-    @Autowired
-    private TareaService tareaService;
 
     /**
      * Función que devuelve la vista principal con las tareas
