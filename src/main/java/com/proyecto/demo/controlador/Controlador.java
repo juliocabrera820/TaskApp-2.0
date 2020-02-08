@@ -1,7 +1,7 @@
 package com.proyecto.demo.controlador;
 
-import com.proyecto.demo.model.entity.Tarea;
-import com.proyecto.demo.model.service.TareaService;
+import com.proyecto.demo.modelo.entidad.Tarea;
+import com.proyecto.demo.modelo.servicio.ServicioTarea;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +29,7 @@ import java.util.Optional;
 public class Controlador {
 
     @Autowired
-    private TareaService tareaService;
+    private ServicioTarea servicioTarea;
     private List<String> estados;
     private List<String> prioridades;
 
@@ -49,7 +49,7 @@ public class Controlador {
      */
     @GetMapping("/")
     public String listar(Model model){
-        List<Tarea> tareas = tareaService.listar();
+        List<Tarea> tareas = servicioTarea.listar();
         model.addAttribute("tareas",tareas);
         return "index";
     }
@@ -88,7 +88,7 @@ public class Controlador {
             model.addAttribute("prioridades",prioridades);
             return "formTarea";
         }
-        tareaService.agregar(tarea);
+        servicioTarea.agregar(tarea);
         attributes.addFlashAttribute("guardado","La tarea se guardó");
         return "redirect:/";
     }
@@ -104,10 +104,10 @@ public class Controlador {
      */
     @GetMapping("/editar/{id}")
     public String editar(Model model,@PathVariable("id") int id,RedirectAttributes attributes){
-        Optional<Tarea> tareaOp = Optional.ofNullable(tareaService.editar(id));
+        Optional<Tarea> tareaOp = Optional.ofNullable(servicioTarea.editar(id));
         if(tareaOp.isPresent()){
             model.addAttribute("titulo","Editar Tarea");
-            Tarea tarea = tareaService.editar(id);
+            Tarea tarea = servicioTarea.editar(id);
             model.addAttribute("tarea",tarea);
             model.addAttribute("estados",estados);
             model.addAttribute("prioridades",prioridades);
@@ -125,9 +125,9 @@ public class Controlador {
      */
     @GetMapping("/eliminar/{id}")
     public String eliminar(@PathVariable("id") int id,RedirectAttributes attributes){
-        Optional<Tarea> tareaOp = Optional.ofNullable(tareaService.editar(id));
+        Optional<Tarea> tareaOp = Optional.ofNullable(servicioTarea.editar(id));
         if (tareaOp.isPresent()){
-            tareaService.eliminar(id);
+            servicioTarea.eliminar(id);
             attributes.addFlashAttribute("eliminado","La tarea ha sido eliminada");
             return "redirect:/";
         }
