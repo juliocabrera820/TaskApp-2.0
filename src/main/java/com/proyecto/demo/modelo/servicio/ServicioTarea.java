@@ -1,6 +1,6 @@
-package com.proyecto.demo.model.service;
+package com.proyecto.demo.modelo.servicio;
 
-import com.proyecto.demo.model.entity.Tarea;
+import com.proyecto.demo.modelo.entidad.Tarea;
 import java.util.List;
 
 /**
@@ -10,7 +10,7 @@ import java.util.List;
  * @author emmanuel-rivero
  * @version 2.0
  */
-public interface TareaService {
+public interface ServicioTarea {
     /**
      * Función que devuelve una lista de tipo Tarea
      * @return lista de tipo Tarea

@@ -1,7 +1,7 @@
-package com.proyecto.demo.model.service;
+package com.proyecto.demo.modelo.servicio;
 
-import com.proyecto.demo.model.entity.Tarea;
-import com.proyecto.demo.model.repository.TareaRepository;
+import com.proyecto.demo.modelo.entidad.Tarea;
+import com.proyecto.demo.modelo.repositorio.RepositorioTarea;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -14,10 +14,10 @@ import java.util.List;
  * @version 2.0
  */
 @Service
-public class TareaServiceImpl implements TareaService {
+public class ServicioTareaImpl implements ServicioTarea {
 
     @Autowired
-    private TareaRepository tareaRepository;
+    private RepositorioTarea repositorioTarea;
 
     /**
      * Función que devuelve los registros de la base de datos
@@ -25,7 +25,7 @@ public class TareaServiceImpl implements TareaService {
      */
     @Override
     public List<Tarea> listar() {
-        return (List<Tarea>) tareaRepository.findAll();
+        return (List<Tarea>) repositorioTarea.findAll();
     }
 
     /**
@@ -34,7 +34,7 @@ public class TareaServiceImpl implements TareaService {
      */
     @Override
     public void agregar(Tarea tarea) {
-        tareaRepository.save(tarea);
+        repositorioTarea.save(tarea);
     }
 
     /**
@@ -44,7 +44,7 @@ public class TareaServiceImpl implements TareaService {
      */
     @Override
     public Tarea editar(int id) {
-        return tareaRepository.findById(id).orElse(null);
+        return repositorioTarea.findById(id).orElse(null);
     }
 
     /**
@@ -53,6 +53,6 @@ public class TareaServiceImpl implements TareaService {
      */
     @Override
     public void eliminar(int id) {
-        tareaRepository.deleteById(id);
+        repositorioTarea.deleteById(id);
     }
 }
