@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Tareas</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/mdb.css">
-</head>
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/slate/bootstrap.min.css" rel="stylesheet" integrity="sha384-G9YbB4o4U6WS4wCthMOpAeweY4gQJyyx0P3nZbEBHyz+AtNoeasfRChmek1C2iqV" crossorigin="anonymous"></head>
 <body>
 <nav class="navbar navbar-dark bg-dark">
     <a href="" class="text-white">
@@ -16,22 +14,26 @@
 
 <div class="alert alert-success alert-dismissible" th:if="${guardado!=null}">
     <label th:text="${guardado}"></label>
-    <button type="button" class="close" data-dismiss="alert"></button>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
 </div>
 <div class="alert alert-danger alert-dismissible" th:if="${eliminado!=null}">
     <label th:text="${eliminado}"></label>
-    <button type="button" class="close" data-dismiss="alert"></button>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
 </div>
 <div class="alert alert-info alert-dismissible" th:if="${editado!=null}">
     <label th:text="${editado}"></label>
-    <button type="button" class="close" data-dismiss="alert"></button>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
 </div>
 
-<div class="container">
+<div class="container text-white">
     <h1 th:if="${tareas.isEmpty()}">No hay tareas</h1>
-    <div class="card-header bf-info text-white">
-        <a class="btn btn-success float-left" th:href="@{/crear}">Agregar</a>
-    </div>
+    <a class="btn btn-success float-left" th:href="@{/crear}">Agregar</a>
     <div class="row mt-4" th:if="${!tareas.isEmpty()}">
         <th:block th:each="tarea : ${tareas}">
             <div class="col-md-4 hoverable">
@@ -45,9 +47,7 @@
                         <span class="badge badge-pill badge-success ml-2" th:text="${tarea.estado}"></span>
                     </div>
                     <div>
-                        <p class="mt-4">
-                            <mark th:text="${tarea.responsable}"></mark>
-                        </p>
+                        <p class="mt-4"th:text="${tarea.responsable}"></p>
                     </div>
                 </div>
                 <div class="Button" align="center">
@@ -58,5 +58,8 @@
         </th:block>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 </html>
